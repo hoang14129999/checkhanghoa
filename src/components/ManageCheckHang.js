@@ -34,7 +34,7 @@ const ManageCheckHang = ({ user, onLogout }) => {
   const formatDateTime = (isoString) => {
     if (!isoString) return '---';
     const date = new Date(isoString);
-    date.setHours(date.getHours() + 5);
+    date.setHours(date.getHours() + 7);
     return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} ${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
   };
 
