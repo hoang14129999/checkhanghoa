@@ -34,7 +34,7 @@ const ManageCheckHang = ({ user, onLogout }) => {
   const formatDateTime = (isoString) => {
     if (!isoString) return '---';
     const date = new Date(isoString);
-    date.setHours(date.getHours() + 7);
+    date.setHours(date.getHours() + 5);
     return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} ${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
   };
 
@@ -54,6 +54,8 @@ const ManageCheckHang = ({ user, onLogout }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const now = new Date();
+    now.setHours(now.getHours() + 7); // điều chỉnh về múi giờ VN
+
     const { Tensp, NSX, HSD, Songayhethan, Songaysanxuat, Luuy } = formData;
     let daysToExpire = parseInt(Songayhethan) || 0;
 
@@ -207,8 +209,8 @@ const ManageCheckHang = ({ user, onLogout }) => {
             <th>Tên SP</th>
             <th>NSX</th>
             <th>HSD</th>
-            <th>Còn 20%</th>
             <th>Còn 30%</th>
+            <th>Còn 20%</th>
             <th>Số ngày SX</th>
             <th>Lưu ý</th>
             <th>Xóa</th>
@@ -221,8 +223,8 @@ const ManageCheckHang = ({ user, onLogout }) => {
               <td>{item.Tensp}</td>
               <td>{item.NSX ? formatDate(item.NSX) : '---'}</td>
               <td>{item.HSD ? formatDate(item.HSD) : '---'}</td>
-              <td>{calculatePercentRemaining(item.NSX, item.HSD, 0.2, item.Songaysanxuat)}</td>
               <td>{calculatePercentRemaining(item.NSX, item.HSD, 0.3, item.Songaysanxuat)}</td>
+              <td>{calculatePercentRemaining(item.NSX, item.HSD, 0.2, item.Songaysanxuat)}</td>
               <td>{item.Songaysanxuat ? item.Songaysanxuat + ' ngày' : 'Không có'}</td>
               <td>{item.Luuy}</td>
               <td><button onClick={() => handleDelete(item.Thoigiantao)}>Xóa</button></td>
