@@ -1,4 +1,4 @@
-// ✅ FILE: ManageCheckHang.js
+// ✅ FILE: ManageCheckHang.js (React frontend component)
 import React, { useState, useEffect } from 'react';
 import './ManageCheckHang.css';
 import axios from 'axios';
@@ -31,13 +31,20 @@ const ManageCheckHang = ({ user, onLogout }) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // ❌ KHÔNG cộng +7 khi hiển thị vì đã lưu đúng giờ VN
+  // ✅ Sửa: không cộng +7 nữa
   const formatDateTime = (isoString) => {
-    if (!isoString) return '---';
-    const date = new Date(isoString);
-    return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} ${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
-  };
+  if (!isoString) return '---';
+  const date = new Date(isoString);
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const day = date.getDate(); // không padStart => bỏ số 0
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `${hours}:${minutes} ${day}/${month}/${year}`;
+};
 
+
+  // ✅ Sửa: không cộng +7 nữa
   const formatDate = (isoString) => {
     if (!isoString) return '---';
     const date = new Date(isoString);
@@ -53,7 +60,7 @@ const ManageCheckHang = ({ user, onLogout }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const now = new Date();
-    now.setHours(now.getHours() + 7); // ✅ lưu giờ VN
+    now.setHours(now.getHours() + 7); // ✅ vẫn giữ +7 để lưu giờ VN
 
     const { Tensp, NSX, HSD, Songayhethan, Songaysanxuat, Luuy } = formData;
     let daysToExpire = parseInt(Songayhethan) || 0;
@@ -78,6 +85,8 @@ const ManageCheckHang = ({ user, onLogout }) => {
       Thoigiantao: thoigiantaoString,
       id_nguoidung: user.id_nguoidung
     };
+
+    console.log('📤 Gửi dữ liệu:', dataToSend);
 
     try {
       await axios.post('https://checkhang-production.up.railway.app/checkhang', dataToSend);
@@ -216,7 +225,7 @@ const ManageCheckHang = ({ user, onLogout }) => {
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.Thoigiantao}</td>
+              <td>{formatDateTime(item.Thoigiantao)}</td>
               <td>{item.Tensp}</td>
               <td>{item.NSX ? formatDate(item.NSX) : '---'}</td>
               <td>{item.HSD ? formatDate(item.HSD) : '---'}</td>
