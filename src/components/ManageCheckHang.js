@@ -60,7 +60,6 @@ const ManageCheckHang = ({ user, onLogout }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const now = new Date();
-    now.setHours(now.getHours() + 7); // ✅ vẫn giữ +7 để lưu giờ VN
 
     const { Tensp, NSX, HSD, Songayhethan, Songaysanxuat, Luuy } = formData;
     let daysToExpire = parseInt(Songayhethan) || 0;
