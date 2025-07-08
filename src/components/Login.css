@@ -1,0 +1,118 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; /* Light background for the entire page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure the page takes the full height of the viewport */
+    margin: 0;
+    color: #333;
+}
+
+.login-container {
+    background-color: #ffffff;
+    padding: 60px; /* Increased padding for a larger container */
+    border-radius: 16px; /* More rounded corners */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    text-align: center;
+    /* max-width: 450px; Increased max width */
+    width: 600px;
+    height: 600px;
+    box-sizing: border-box; /* Ensure padding does not increase size */
+    display: flex; /* Added flexbox to center content */
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center horizontally */
+}
+
+.login-logo {
+    height: 80px; /* Increased logo size */
+    margin-bottom: 30px; /* Increased space below logo */
+}
+
+h2 {
+    color: #34495e; /* Darker text color */
+    margin-bottom: 40px; /* Increased space below title */
+    font-size: 32px; /* Larger font size */
+    font-weight: 700; /* Bolder text */
+}
+
+form div {
+    margin-bottom: 25px; /* Increased space between input groups */
+    text-align: left; /* Left-align label and input */
+}
+
+label {
+    display: block; /* Ensure label is above input */
+    margin-bottom: 10px; /* Increased space between label and input */
+    font-weight: 600; /* Bold label text */
+    color: #555; /* Label text color */
+    font-size: 16px; /* Increased font size */
+}
+
+input {
+    width: 100%;
+    padding: 15px 20px; /* Increased padding for input */
+    border: 1px solid #ced4da; /* Light border */
+    border-radius: 10px; /* More rounded corners for input */
+    font-size: 18px; /* Larger font size in input */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+}
+
+input:focus {
+    border-color: #007bff; /* Border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Shadow effect on focus */
+    outline: none; /* Remove default outline */
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 16px; /* Increased padding for button */
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    border-radius: 10px; /* More rounded corners for button */
+    font-size: 20px; /* Larger font size */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Hover effects */
+    margin-top: 20px; /* Increased space above button */
+    padding-bottom: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+.error-message {
+    color: #dc3545; /* Red color for error messages */
+    font-size: 16px; /* Increased font size for error messages */
+    margin-top: 20px; /* Increased space above error message */
+    font-weight: 500;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 80px; /* Increased padding for a larger container */
+        border-radius: 16px; /* More rounded corners */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Softer shadow */
+        max-width: 550px; /* Increased max width */
+        width: 100%;
+        box-sizing: border-box; /* Ensure padding does not increase size */
+        display: flex; /* Added flexbox to center content */
+        flex-direction: column; /* Arrange items in a column */
+        align-items: center; /* Center horizontally */
+    }
+
+    h2 {
+        font-size: 28px; /* Adjusted font size for smaller screens */
+    }
+
+    input,
+    button {
+        font-size: 16px; /* Adjusted font size for smaller screens */
+        padding: 12px 15px; /* Adjusted padding for smaller screens */
+    }
+}

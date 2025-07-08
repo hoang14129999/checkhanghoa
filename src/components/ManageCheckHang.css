@@ -1,0 +1,172 @@
+/* MultipleFiles/ManageCheckHang.css */
+
+.container {
+    max-width: 1200px; /* Tăng chiều rộng tối đa của container để sử dụng nhiều không gian hơn */
+    margin: 0 auto; /* Căn giữa container */
+    padding: 30px; /* Tăng padding cho container */
+    background-color: #ffffff; /* Nền trắng cho container */
+    border-radius: 12px; /* Bo góc cho container */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Đổ bóng cho container */
+}
+
+.header {
+    display: flex; /* Sử dụng flexbox để căn giữa logo và nút đăng xuất */
+    justify-content: space-between; /* Căn giữa giữa logo và nút */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 30px; /* Tăng khoảng cách dưới header */
+}
+
+.header .logo {
+    max-height: 80px; /* Tăng kích thước logo */
+}
+
+.logout-button {
+    background-color: #dc3545; /* Màu đỏ cho nút đăng xuất */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Bo góc cho nút */
+    padding: 12px 20px; /* Tăng padding cho nút */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+    font-size: 16px; /* Tăng kích thước chữ */
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Màu đỏ đậm hơn khi hover */
+}
+
+h2 {
+    color: #34495e; /* Màu chữ đậm hơn */
+    margin-bottom: 25px; /* Tăng khoảng cách dưới tiêu đề */
+    font-size: 32px; /* Tăng kích thước chữ lớn hơn */
+    font-weight: 600; /* Chữ đậm */
+    text-align: center; /* Căn giữa tiêu đề */
+}
+
+label {
+    display: block; /* Đảm bảo label nằm trên input */
+    margin-bottom: 10px; /* Tăng khoảng cách giữa label và input */
+    font-weight: 600; /* Chữ đậm cho label */
+    color: #555; /* Màu chữ cho label */
+    font-size: 18px; /* Tăng kích thước chữ cho label */
+}
+
+select, input[type="text"], input[type="date"], input[type="number"] {
+    width: 100%; /* Chiều rộng 100% cho các input */
+    padding: 15px; /* Tăng padding cho input */
+    border: 1px solid #ced4da; /* Border nhẹ */
+    border-radius: 8px; /* Bo góc cho input */
+    margin-bottom: 20px; /* Tăng khoảng cách giữa các input */
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+    font-size: 16px; /* Tăng kích thước chữ cho input */
+}
+
+button[type="submit"] {
+    width: 100%; /* Chiều rộng 100% cho nút thêm */
+    padding: 16px; /* Tăng padding cho nút */
+    background-color: #007bff; /* Màu xanh dương */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Bo góc cho nút */
+    font-size: 20px; /* Tăng kích thước chữ lớn hơn */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Hiệu ứng hover */
+    margin-top: 10px; /* Thêm khoảng cách trên nút submit */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Màu xanh đậm hơn khi hover */
+}
+
+h3 {
+    color: #34495e;
+    margin-top: 40px; /* Tăng khoảng cách trên tiêu đề bảng */
+    margin-bottom: 20px;
+    font-size: 28px; /* Tăng kích thước chữ cho tiêu đề bảng */
+    font-weight: 600;
+    text-align: center; /* Căn giữa tiêu đề bảng */
+}
+
+.product-table {
+    width: 100%; /* Chiều rộng 100% cho bảng */
+    border-collapse: collapse; /* Gộp các border lại */
+    margin-top: 30px; /* Tăng khoảng cách trên bảng */
+    font-size: 16px; /* Tăng kích thước chữ cho bảng */
+}
+
+.product-table th, .product-table td {
+    border: 1px solid #dee2e6; /* Border cho các ô */
+    padding: 12px; /* Tăng padding cho các ô */
+    text-align: left; /* Căn trái cho nội dung */
+}
+
+.product-table th {
+    background-color: #f8f9fa; /* Nền nhẹ cho tiêu đề bảng */
+    font-weight: 600; /* Chữ đậm cho tiêu đề */
+    font-size: 18px; /* Tăng kích thước chữ cho tiêu đề cột */
+}
+
+.product-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Nền nhẹ cho các hàng chẵn */
+}
+
+.product-table tr:hover {
+    background-color: #e9ecef; /* Hiệu ứng hover cho hàng */
+}
+
+.product-table button {
+    background-color: #dc3545; /* Màu đỏ cho nút xóa */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bo góc cho nút */
+    padding: 8px 15px; /* Tăng padding cho nút */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+    font-size: 14px; /* Tăng kích thước chữ cho nút xóa */
+}
+
+.product-table button:hover {
+    background-color: #c82333; /* Màu đỏ đậm hơn khi hover */
+}
+
+/* Thêm media queries để đảm bảo responsive trên các màn hình nhỏ hơn */
+@media (max-width: 768px) {
+    .container {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    h3 {
+        font-size: 24px;
+    }
+
+    .logout-button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    select, input[type="text"], input[type="date"], input[type="number"] {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        padding: 12px;
+        font-size: 18px;
+    }
+
+    .product-table th, .product-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .product-table button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
