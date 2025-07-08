@@ -216,7 +216,7 @@ const ManageCheckHang = ({ user, onLogout }) => {
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{formatDateTime(item.Thoigiantao)}</td>
+              <td>{item.Thoigiantao}</td>
               <td>{item.Tensp}</td>
               <td>{item.NSX ? formatDate(item.NSX) : '---'}</td>
               <td>{item.HSD ? formatDate(item.HSD) : '---'}</td>
