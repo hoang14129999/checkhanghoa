@@ -31,17 +31,17 @@ const ManageCheckHang = ({ user, onLogout }) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // ✅ Sửa: không cộng +7 nữa
   const formatDateTime = (isoString) => {
     if (!isoString) return '---';
     const date = new Date(isoString);
-    date.setHours(date.getHours() + 7);
     return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')} ${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
   };
 
+  // ✅ Sửa: không cộng +7 nữa
   const formatDate = (isoString) => {
     if (!isoString) return '---';
     const date = new Date(isoString);
-    date.setHours(date.getHours() + 7);
     return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
   };
 
@@ -54,7 +54,7 @@ const ManageCheckHang = ({ user, onLogout }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const now = new Date();
-    now.setHours(now.getHours() + 7); // điều chỉnh về múi giờ VN
+    now.setHours(now.getHours() + 7); // ✅ vẫn giữ +7 để lưu giờ VN
 
     const { Tensp, NSX, HSD, Songayhethan, Songaysanxuat, Luuy } = formData;
     let daysToExpire = parseInt(Songayhethan) || 0;
