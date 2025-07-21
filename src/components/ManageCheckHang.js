@@ -33,15 +33,15 @@ const ManageCheckHang = ({ user, onLogout }) => {
 
   // ✅ Sửa: không cộng +7 nữa
   const formatDateTime = (isoString) => {
-  if (!isoString) return '---';
-  const date = new Date(isoString);
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const day = date.getDate(); // không padStart => bỏ số 0
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return `${hours}:${minutes} ${day}/${month}/${year}`;
-};
+    if (!isoString) return '---';
+    const date = new Date(isoString);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const day = date.getDate(); // không padStart => bỏ số 0
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${hours}:${minutes} ${day}/${month}/${year}`;
+  };
 
 
   // ✅ Sửa: không cộng +7 nữa
@@ -142,9 +142,11 @@ const ManageCheckHang = ({ user, onLogout }) => {
 
   const calculatePercentRemaining = (nsx, hsd, percent, songaySanXuat = 0) => {
     if (!hsd && !nsx) return '---';
-    const now = new Date();
-    let nsxDate, hsdDate;
 
+    let nsxDate, hsdDate;
+    const now = new Date();
+
+    // Tính ngày NSX và HSD nếu thiếu
     if (nsx && !hsd && songaySanXuat) {
       nsxDate = new Date(nsx);
       hsdDate = new Date(nsxDate);
@@ -160,17 +162,28 @@ const ManageCheckHang = ({ user, onLogout }) => {
       return '---';
     }
 
+    // Nếu ngày không hợp lệ
     if (isNaN(nsxDate) || isNaN(hsdDate)) return '---';
 
+    // Tính tổng số ngày
     const totalDays = Math.ceil((hsdDate - nsxDate) / (1000 * 60 * 60 * 24));
+
+    // Tính ngày đạt mốc phần trăm (threshold)
     const thresholdDate = new Date(hsdDate);
-    thresholdDate.setDate(hsdDate.getDate() - Math.ceil(totalDays * percent));
+    const offset = Math.ceil(totalDays * percent);
+    thresholdDate.setDate(hsdDate.getDate() - offset);
+
+    // Tính số ngày còn lại đến ngày đó
     const remaining = Math.round((thresholdDate.setHours(0, 0, 0, 0) - now.setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24));
 
+    // Format ngày dd/mm/yyyy
+    const thresholdDateStr = `${thresholdDate.getDate().toString().padStart(2, '0')}/${(thresholdDate.getMonth() + 1).toString().padStart(2, '0')}/${thresholdDate.getFullYear()}`;
+
     return remaining >= 0
-      ? `Còn ${remaining} ngày đến ${percent * 100}%`
-      : `Đã quá ${Math.abs(remaining)} ngày khỏi ${percent * 100}%`;
+      ? `Còn ${remaining} ngày đến ${percent * 100}% ngày lùi là ${thresholdDateStr}`
+      : `Đã quá ${Math.abs(remaining)} ngày khỏi ${percent * 100}% ngày lùi là ${thresholdDateStr}`;
   };
+
 
   return (
     <div className="container">
