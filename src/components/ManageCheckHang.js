@@ -126,11 +126,11 @@ const ManageCheckHang = ({ user, onLogout }) => {
         }
 
         const totalDays = Math.ceil((hsdDate - nsxDate) / (1000 * 60 * 60 * 24));
-        const thresholdDate20 = new Date(hsdDate);
-        thresholdDate20.setDate(hsdDate.getDate() - Math.ceil(totalDays * 0.2));
-        const remaining20 = Math.round((thresholdDate20.setHours(0, 0, 0, 0) - new Date().setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24));
+        const thresholdDate30 = new Date(hsdDate);
+        thresholdDate30.setDate(hsdDate.getDate() - Math.ceil(totalDays * 0.3));
+        const remaining30 = Math.round((thresholdDate30.setHours(0, 0, 0, 0) - new Date().setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24));
 
-        return { ...item, _sortKey: remaining20 };
+        return { ...item, _sortKey: remaining30 };
       });
 
       enrichedData.sort((a, b) => a._sortKey - b._sortKey);
@@ -141,41 +141,41 @@ const ManageCheckHang = ({ user, onLogout }) => {
   };
 
   const calculatePercentRemaining = (nsx, hsd, percent, songaySanXuat = 0) => {
-  if (!hsd && !nsx) return '---';
+    if (!hsd && !nsx) return '---';
 
-  let nsxDate, hsdDate;
-  const now = new Date();
+    let nsxDate, hsdDate;
+    const now = new Date();
 
-  if (nsx && !hsd && songaySanXuat) {
-    nsxDate = new Date(nsx);
-    hsdDate = new Date(nsxDate);
-    hsdDate.setDate(nsxDate.getDate() + parseInt(songaySanXuat));
-  } else if (!nsx && hsd && songaySanXuat) {
-    hsdDate = new Date(hsd);
-    nsxDate = new Date(hsdDate);
-    nsxDate.setDate(hsdDate.getDate() - parseInt(songaySanXuat));
-  } else if (nsx && hsd) {
-    nsxDate = new Date(nsx);
-    hsdDate = new Date(hsd);
-  } else {
-    return '---';
-  }
+    if (nsx && !hsd && songaySanXuat) {
+      nsxDate = new Date(nsx);
+      hsdDate = new Date(nsxDate);
+      hsdDate.setDate(nsxDate.getDate() + parseInt(songaySanXuat));
+    } else if (!nsx && hsd && songaySanXuat) {
+      hsdDate = new Date(hsd);
+      nsxDate = new Date(hsdDate);
+      nsxDate.setDate(hsdDate.getDate() - parseInt(songaySanXuat));
+    } else if (nsx && hsd) {
+      nsxDate = new Date(nsx);
+      hsdDate = new Date(hsd);
+    } else {
+      return '---';
+    }
 
-  if (isNaN(nsxDate) || isNaN(hsdDate)) return '---';
+    if (isNaN(nsxDate) || isNaN(hsdDate)) return '---';
 
-  const totalDays = Math.ceil((hsdDate - nsxDate) / (1000 * 60 * 60 * 24));
-  const thresholdDate = new Date(hsdDate);
-  const offset = Math.ceil(totalDays * percent);
-  thresholdDate.setDate(hsdDate.getDate() - offset);
+    const totalDays = Math.ceil((hsdDate - nsxDate) / (1000 * 60 * 60 * 24));
+    const thresholdDate = new Date(hsdDate);
+    const offset = Math.ceil(totalDays * percent);
+    thresholdDate.setDate(hsdDate.getDate() - offset);
 
-  const remaining = Math.round((thresholdDate.setHours(0, 0, 0, 0) - now.setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24));
+    const remaining = Math.round((thresholdDate.setHours(0, 0, 0, 0) - now.setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24));
 
-  const formattedDate = `${thresholdDate.getDate().toString().padStart(2, '0')}/${(thresholdDate.getMonth() + 1).toString().padStart(2, '0')}/${thresholdDate.getFullYear()}`;
+    const formattedDate = `${thresholdDate.getDate().toString().padStart(2, '0')}/${(thresholdDate.getMonth() + 1).toString().padStart(2, '0')}/${thresholdDate.getFullYear()}`;
 
-  return remaining >= 0
-    ? `Còn ${remaining} ngày (${formattedDate})`
-    : `Đã quá ${Math.abs(remaining)} ngày (${formattedDate})`;
-};
+    return remaining >= 0
+      ? `Còn ${remaining} ngày (${formattedDate})`
+      : `Đã quá ${Math.abs(remaining)} ngày (${formattedDate})`;
+  };
 
 
 
