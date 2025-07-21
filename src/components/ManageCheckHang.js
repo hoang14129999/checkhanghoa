@@ -141,48 +141,42 @@ const ManageCheckHang = ({ user, onLogout }) => {
   };
 
   const calculatePercentRemaining = (nsx, hsd, percent, songaySanXuat = 0) => {
-    if (!hsd && !nsx) return '---';
+  if (!hsd && !nsx) return '---';
 
-    let nsxDate, hsdDate;
-    const now = new Date();
+  let nsxDate, hsdDate;
+  const now = new Date();
 
-    // Tính ngày NSX và HSD nếu thiếu
-    if (nsx && !hsd && songaySanXuat) {
-      nsxDate = new Date(nsx);
-      hsdDate = new Date(nsxDate);
-      hsdDate.setDate(nsxDate.getDate() + parseInt(songaySanXuat));
-    } else if (!nsx && hsd && songaySanXuat) {
-      hsdDate = new Date(hsd);
-      nsxDate = new Date(hsdDate);
-      nsxDate.setDate(hsdDate.getDate() - parseInt(songaySanXuat));
-    } else if (nsx && hsd) {
-      nsxDate = new Date(nsx);
-      hsdDate = new Date(hsd);
-    } else {
-      return '---';
-    }
+  if (nsx && !hsd && songaySanXuat) {
+    nsxDate = new Date(nsx);
+    hsdDate = new Date(nsxDate);
+    hsdDate.setDate(nsxDate.getDate() + parseInt(songaySanXuat));
+  } else if (!nsx && hsd && songaySanXuat) {
+    hsdDate = new Date(hsd);
+    nsxDate = new Date(hsdDate);
+    nsxDate.setDate(hsdDate.getDate() - parseInt(songaySanXuat));
+  } else if (nsx && hsd) {
+    nsxDate = new Date(nsx);
+    hsdDate = new Date(hsd);
+  } else {
+    return '---';
+  }
 
-    // Nếu ngày không hợp lệ
-    if (isNaN(nsxDate) || isNaN(hsdDate)) return '---';
+  if (isNaN(nsxDate) || isNaN(hsdDate)) return '---';
 
-    // Tính tổng số ngày
-    const totalDays = Math.ceil((hsdDate - nsxDate) / (1000 * 60 * 60 * 24));
+  const totalDays = Math.ceil((hsdDate - nsxDate) / (1000 * 60 * 60 * 24));
+  const thresholdDate = new Date(hsdDate);
+  const offset = Math.ceil(totalDays * percent);
+  thresholdDate.setDate(hsdDate.getDate() - offset);
 
-    // Tính ngày đạt mốc phần trăm (threshold)
-    const thresholdDate = new Date(hsdDate);
-    const offset = Math.ceil(totalDays * percent);
-    thresholdDate.setDate(hsdDate.getDate() - offset);
+  const remaining = Math.round((thresholdDate.setHours(0, 0, 0, 0) - now.setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24));
 
-    // Tính số ngày còn lại đến ngày đó
-    const remaining = Math.round((thresholdDate.setHours(0, 0, 0, 0) - now.setHours(0, 0, 0, 0)) / (1000 * 60 * 60 * 24));
+  const formattedDate = `${thresholdDate.getDate().toString().padStart(2, '0')}/${(thresholdDate.getMonth() + 1).toString().padStart(2, '0')}/${thresholdDate.getFullYear()}`;
 
-    // Format ngày dd/mm/yyyy
-    const thresholdDateStr = `${thresholdDate.getDate().toString().padStart(2, '0')}/${(thresholdDate.getMonth() + 1).toString().padStart(2, '0')}/${thresholdDate.getFullYear()}`;
+  return remaining >= 0
+    ? `Còn ${remaining} ngày (${formattedDate})`
+    : `Đã quá ${Math.abs(remaining)} ngày (${formattedDate})`;
+};
 
-    return remaining >= 0
-      ? `Còn ${remaining} ngày đến ${percent * 100}% ngày lùi là ${thresholdDateStr}`
-      : `Đã quá ${Math.abs(remaining)} ngày khỏi ${percent * 100}% ngày lùi là ${thresholdDateStr}`;
-  };
 
 
   return (
